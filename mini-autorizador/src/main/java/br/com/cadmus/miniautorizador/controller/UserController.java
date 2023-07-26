@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.ResourceAccessException;
 
 @RestController
-@RequestMapping(value = "/api/user")
+@RequestMapping(value = "/api/users")
 public class UserController {
 
     private final UserServiceImpl userServiceImpl;
@@ -17,7 +17,7 @@ public class UserController {
         this.userServiceImpl = userServiceImpl;
     }
 
-    @GetMapping("/find-all")
+    @GetMapping("/all")
     public ResponseEntity<?> findAllUsers() {
         try {
             return ResponseEntity.ok(userServiceImpl.findall());
@@ -26,8 +26,25 @@ public class UserController {
         }
     }
 
-    @PostMapping("/new-user")
+    @GetMapping("/byID/{id}")
+    public ResponseEntity<UserDTO> findUserByID(@PathVariable Long id) {
+        return ResponseEntity.ok(userServiceImpl.findByID(id));
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<UserDTO> findUserByID(@PathVariable Long id, @RequestBody UserDTO usuarioDTO) {
+        return ResponseEntity.ok(userServiceImpl.updateUser(id, usuarioDTO));
+    }
+
+    @PostMapping("/new")
     public ResponseEntity<UserDTO> newUser(@RequestBody UserDTO userDTO) {
         return new ResponseEntity<>(userServiceImpl.saveNewUser(userDTO), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userServiceImpl.deleteUser(id);
+
+        return ResponseEntity.noContent().build();
     }
 }
