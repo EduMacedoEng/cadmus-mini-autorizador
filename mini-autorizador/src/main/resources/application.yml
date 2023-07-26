@@ -3,14 +3,18 @@ spring:
     name: ws-sesp-service-sic-prontuario
   data:
     mongodb:
-      uri: mongodb://localhost:27017/miniautorizador
+      uri: mongodb://user:password@localhost:27017/miniautorizador
   datasource:
-    url: jdbc:mysql://localhost:3306/miniautorizador?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/miniautorizador?serverTimezone=America/Sao_Paulo
     username: root
     password:
   jpa:
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: America/Sao_Paulo
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
   profiles:
     active: dev
