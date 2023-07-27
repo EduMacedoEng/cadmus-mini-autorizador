@@ -17,7 +17,7 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private ModelMapper modelMapper = new ModelMapper();
+    private final ModelMapper modelMapper = new ModelMapper();
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
@@ -75,6 +75,4 @@ public class UserServiceImpl implements UserService {
 
         userRepository.delete(user);
     }
-
-
 }
