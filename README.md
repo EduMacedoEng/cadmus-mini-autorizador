@@ -10,6 +10,7 @@ Este sistema é uma aplicação Java Spring Boot baseada em MVC e Hibernate. Uti
 - Spring Test: Framework do Spring para testar aplicações Spring Boot. Facilita a escrita de testes unitários e testes de integração.
 - MongoDB: Banco de dados NoSQL orientado a documentos usado pelo sistema. A aplicação utiliza a imagem Docker na versão 4.2 do MongoDB.
 - MySQL: Sistema de gerenciamento de banco de dados relacional utilizado pelo sistema. A aplicação utiliza a imagem Docker na versão 5.7 do MySQL.
+- Keycloak: Software de código aberto para autenticação e gerenciamento de identidade. Estamos utilizando a versão 22.0.1 que oferece vários recursos e melhorias, como maior desempenho, atualizações de segurança, além de novos recursos ou atualizações dos recursos existentes.
 
 ## Arquitetura do Sistema
 O sistema segue a arquitetura em camadas com o modelo MVC (Model-View-Controller).
@@ -34,24 +35,19 @@ cd <nome_do_projeto>
 
 3. Construa a imagem Docker:
 ```sh
-docker build -t nome_da_imagem .
+docker compose up -d
 ```
 
-4. Execute o contêiner:
+4. O Keycloak estará disponível em um conteiner a parte do principal e será necessário executar o seguinte comando.
 ```sh
-docker run -p 8080:8080 nome_da_imagem
+docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:22.0.1 start-dev
 ```
 
-Depois de executar esses passos, a aplicação deverá estar disponível em `http://localhost:8080`.
+Depois de executar esses passos, a aplicação deverá estar disponível em `http://localhost:8081`. 
+O servidor do Keycloak estará disponível em `http://localhost:8080`. 
 
 ## Contribuição
 Este repositório é privado e qualquer contribuição para este projeto está sujeita a aprovação. Para mais informações, entre em contato com o proprietário do repositório.
 
-## Licença
-Este projeto é licenciado sob os termos da licença XYZ. Para mais detalhes, veja o arquivo LICENSE no repositório.
-
 ## Contato
 Para qualquer dúvida ou problema, entre em contato com o proprietário do repositório.
-
-## Observações
-Este sistema ainda está em desenvolvimento e pode não funcionar completamente como esperado. Além disso, observe que ainda não foram escritos testes unitários para este sistema. Essas melhorias estão planejadas para futuras atualizações.
