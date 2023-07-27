@@ -33,3 +33,7 @@ jwt:
     converter:
       resource-id: cadmus-client
       principle-attribute: preferred_username
+
+springdoc:
+  swagger-ui:
+    path: twd.html
