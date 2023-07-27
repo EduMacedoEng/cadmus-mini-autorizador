@@ -1,6 +1,15 @@
+server:
+  port: 8081
+
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/Cadmus-Realm
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
   application:
-    name: ws-sesp-service-sic-prontuario
+    name: cadmus-miniautorizador
   data:
     mongodb:
       uri: mongodb://user:password@localhost:27017/miniautorizador
@@ -19,5 +28,8 @@ spring:
   profiles:
     active: dev
 
-server:
-  port: 8080
+jwt:
+  auth:
+    converter:
+      resource-id: cadmus-client
+      principle-attribute: preferred_username
